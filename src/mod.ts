@@ -21,7 +21,7 @@ if (import.meta.main) {
     Deno.exit();
   }
 
-  window.recording = {};
+  globalThis.recording = {};
 
   if (user) {
     if (typeof user !== 'string') {
