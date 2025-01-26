@@ -20,7 +20,7 @@ export default async function recordUser(user: string, output?: string) {
 
   const fileResponse = await fetch(url);
   if (fileResponse.body) {
-    window.recording[user] = true;
+    globalThis.recording[user] = true;
     console.log(`Started recording ${user}...`);
 
     const file = await Deno.open(filename(user, output), { write: true, create: true }).catch(
@@ -31,7 +31,7 @@ export default async function recordUser(user: string, output?: string) {
     );
     const writableStream = writableStreamFromWriter(file);
     await fileResponse.body.pipeTo(writableStream);
-    window.recording[user] = false;
+    globalThis.recording[user] = false;
     console.log(`${user}'s stream ended`);
   }
 }
